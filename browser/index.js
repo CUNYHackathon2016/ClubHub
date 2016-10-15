@@ -1,4 +1,9 @@
 $(function() {
+    /*$.get('/api/uni/1')
+    .done(function (unis) {
+        v
+    })*/
+
     function login (email, password) {
         $.post('/login', {
             email: email,
@@ -15,8 +20,8 @@ $(function() {
         })
     }
 
-    $('#login').click(function() {
-        login($('#login-email').val(), $('#login-password').val())
+    $('#login-button').click(function() {
+        login($('#email_modal').val(), $('#password_modal').val())
     });
 
     $('#signup').click(function() {

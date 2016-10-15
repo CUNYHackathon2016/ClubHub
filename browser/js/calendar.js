@@ -5,6 +5,9 @@
 		scheduler.config.first_hour = 7;
 		scheduler.config.last_hour = 19;
 		scheduler.init('scheduler_here',new Date(),"week");
+
+		var user = {username: "pat"};
+
 		// scheduler.load("./data/events.xml");
 
 
@@ -46,6 +49,8 @@
     location: 'NAC 6/314' } ];*/
 
 	var pastedText;
+	// unsynced schedule
+	var mySpecificSchedule;
 	$('#submit').click(function(evt){
 		var txt = $('#class-text').val();
 		pastedText = txt;
@@ -87,9 +92,49 @@
 			console.log("**********", newArr);
 			newArr.forEach(function (classObj) {
 				console.log(classObj);
-				$.post("/api/user/class", classObj)
+				// $.post("/api/user/class", classObj)
 			})
-			updateSchedule(newArr);
+			updateSchedule(newArr, true);
+			mySpecificSchedule  = newArr;
+
+			//SOCKET LOGIC BELOW
+	var socket = io();
+	var roomcode = parseInt(Math.random()*100);
+	// var nickname = parseInt(Math.random()*100);
+	$('#rooms').val(roomcode);
+	// SOCKETIO
+	var combinedSchedule;
+	$('#create').click(function(evt){
+		var nickname = $('#nickname').val();
+		evt.preventDefault();
+		console.log(mySpecificSchedule);
+		socket.emit('create',nickname, roomcode,mySpecificSchedule);
+	});
+	$('#join').click(function(evt){
+		var nickname = $('#nickname').val();
+		var roomcode = $('#code').val();
+		evt.preventDefault();
+
+		socket.emit('join',nickname, roomcode,mySpecificSchedule);
+	});
+
+	socket.on('update schedule',function(users, schedule){
+		scheduler.clearAll();
+		updateSchedule(schedule, false);
+		$('#chat-box-div').show();
+	});
+
+	socket.on('chat message', function(chatSender, msg){
+		$('#messages').append($('<li>').text(chatSender+' : '+msg));
+		$('#messages-div').scrollTop($('#messages').height());
+		// $('#messages').animate({scrollTop: ''+$('#messages li').height()});
+	});
+
+	$('#chat-input').submit(function(){
+		socket.emit('chat message', $('#msg').val());
+		$('#msg').val('');
+		return false;
+	});
 	});
 
 
@@ -143,12 +188,15 @@
 
 	}
 
-	function updateSchedule(theObject){
-		var allTheColors = ["red","blue","green","orange","purple","brown","gold","fuchsia","gray"];
-		theObject.forEach(function(evt,idx){
-			// console.log(evt.name+" :   "+allTheColors[idx]);
-			evt.color = allTheColors[idx];
-		});
+	function updateSchedule(theObject, isRandomColor){
+    var allTheColors;
+    if (isRandomColor){
+      allTheColors = ["red","blue","green","orange","purple","brown","gold","fuchsia","gray"];
+  		theObject.forEach(function(evt,idx){
+  			// console.log(evt.name+" :   "+allTheColors[idx]);
+  			evt.color = allTheColors[idx];
+  		});
+    }
 
 		for (var i=-1;i<30;i++){
 			theObject.forEach(function(evt){
@@ -204,12 +252,7 @@
 			case "Fr":
 								dayOfWeek = 5;
 			break;
-			// case "Sa":
-			// 					dayOfWeek = 1;
-			// break;
-			// case "Sun":
-			// 					dayOfWeek = 1;
-			// break;
+
 			default:
 			break;
 

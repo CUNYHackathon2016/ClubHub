@@ -1,1 +1,130 @@
-/* your styles go here */
+* {
+	font-family: 'Montserrat', sans-serif !important;
+}
+
+
+
+/* #####################
+		 HEADER
+######################## */
+
+#menuLinks {
+	padding-top: 22px;
+}
+
+#userDetails {
+	padding-left: 10px;
+	text-align: left
+}
+
+#headerCalendar {
+	background: -webkit-radial-gradient(top center, ellipse cover, rgba(128, 241, 114,0.8) 0%,rgba(41, 32, 223, 0.8) 100%), url('http://www.greatvaluecolleges.net/wp-content/uploads/2015/07/city-college-campus-in-harlem-1024x768.jpg') no-repeat ;
+	background-size: cover;
+	min-height: 300px;
+	max-height: 600px;
+}
+
+#pageTitle {
+	color: white;
+	font-size: 48px;
+	margin: 60px 0 150px 0;
+}
+
+section {
+	padding: 0 !important;
+}
+
+
+
+/* #####################
+	  GENERAL USAGE
+######################## */
+
+.sectionTitle {
+	padding: 15px 0;
+	color: #4e585e;
+	text-transform: none;
+	font-weight: lighter;
+}
+
+
+
+
+
+/* #####################
+		SIDEBARS
+######################## */
+
+.clubSideBar {
+	text-align: justify;
+	background-color: #f6f4f7;
+	color: #4e585e;
+	font-size: 13px;
+	padding: 20px;
+}
+
+.clubSideBar p {
+	line-height: 140%;
+}
+
+.clubProfileImage {
+	text-align: center;
+	padding: 25px;
+}
+
+#memberList {
+	padding: 25px;
+	text-align: center;
+}
+
+
+
+
+/* #####################
+	  ANNOUNCEMENTS
+######################## */
+
+.announcementBox {
+	margin: 10px 0;
+	background-color: #f7f7f7;
+	padding: 10px;
+
+	color: #2d5a72;
+	border-radius: 20px;
+	box-shadow: 2px 2px 10px #ccc;
+}
+
+.announcementDate {
+	font-size: 14px;
+	font-style: italic;
+	float: right;
+	padding: 5px;
+}
+
+
+
+
+/* #####################
+	  	 EVENTS
+######################## */
+
+.eventBox {
+	margin: 10px 0;
+}
+
+.eventDate {
+	background-color: #f1eef4 !important;
+	border-radius: 25px;
+	padding: 35px !important;
+}
+
+
+.eventMonth {
+	color: #357394;
+	font-size: 32px;
+}
+
+.eventDay {
+	color: #11abff;
+	font-size: 32px;
+}
