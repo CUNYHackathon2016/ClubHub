@@ -1,1 +1,33 @@
-/* your styles go here */
+* {
+	font-family: 'Montserrat', sans-serif !important;
+}
+
+
+
+/* #####################
+		 HEADER
+######################## */
+
+#menuLinks {
+	padding-top: 22px;
+}
+
+#userDetails {
+	padding-left: 10px;
+	text-align: left
+}
+
+#headerCalendar {
+	background: -webkit-radial-gradient(top center, ellipse cover, rgba(128, 241, 114,0.8) 0%,rgba(41, 32, 223, 0.8) 100%), url('http://www.greatvaluecolleges.net/wp-content/uploads/2015/07/city-college-campus-in-harlem-1024x768.jpg') no-repeat ;
+	background-size: cover;
+	min-height: 300px;
+	max-height: 600px;
+}
+
+
+
+#pageTitle {
+	color: white;
+	font-size: 48px;
+	margin: 60px 0 150px 0;
+}
