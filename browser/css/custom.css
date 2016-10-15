@@ -18,13 +18,10 @@
 }
 
 #headerCalendar {
-	background: -webkit-radial-gradient(top center, ellipse cover, rgba(128, 241, 114,0.8) 0%,rgba(41, 32, 223, 0.8) 100%), url('http://www.greatvaluecolleges.net/wp-content/uploads/2015/07/city-college-campus-in-harlem-1024x768.jpg') no-repeat ;
 	background-size: cover;
 	min-height: 300px;
 	max-height: 600px;
 }
-
-
 
 #pageTitle {
 	color: white;
