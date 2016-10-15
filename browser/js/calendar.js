@@ -184,8 +184,9 @@
   });*/
 
 	$.get('/api/user/classes')
-	.done(function (classes) {
-		parsingDataObj(classes);
+	.done(function (obj) {
+		console.log("OBJ",obj);
+		parsingDataObj(obj.classes);
 	})
 
 
