@@ -1,9 +1,4 @@
 $(function() {
-    /*$.get('/api/uni/1')
-    .done(function (unis) {
-        v
-    })*/
-
     function login (email, password) {
         $.post('/login', {
             email: email,
