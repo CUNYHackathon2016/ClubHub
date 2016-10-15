@@ -24,14 +24,22 @@ function assertIsLoggedIn(req, res, next) {
   return Promise.all(creatingClasses);
 }*/
 
-router.get('/:id/classes', function (req, res, next) {
-  User.findById(req.params.id)
+/*router.get('/current', function (req, res, next) {
+  return req.user
+})*/
+
+router.get('/classes', function (req, res, next) {
+  User.findById(req.user.id)
   .then(function(user) {
     // if (req.user != req.params.id) next()
     return user.getClasses()
   })
   .then(function (classes) {
-    res.send(classes);
+    var returnObj = {
+      username: req.user.username,
+      classes: classes
+    }
+    res.send(returnObj);
   })
   .catch(next);
 })

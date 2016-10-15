@@ -1,12 +1,13 @@
 $(function() {
+
     function login (email, password) {
         $.post('/login', {
             email: email,
             password: password
         })
         .done(function (data) {
-            console.log(data);
-            $('#userid').text("Hello, " + data.user.username);
+            $('#login-button2').addClass("hidden")
+            $('#logout-button').removeClass("hidden");
         })
         .fail(function(data) {
             $('#userid').text("Error: " + data.responseText);
@@ -39,7 +40,8 @@ $(function() {
     $('#logout').click(function() {
         $.get('/logout')
         .done(function() {
-            $('#userid').text("Login or Signup Below!");
+            $('#login-button2').removeClass("hidden")
+            $('#logout-button').addClass("hidden");
         })
     })
 

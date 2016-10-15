@@ -2,7 +2,7 @@ article {
     background-color: white;
     color: purple;
     width: 350px;
-    height: 350px;
+    height: auto;
     border:1px light-grey;
     border-radius:5px;
     box-shadow:0px 0px 2px 2px grey;
@@ -67,4 +67,8 @@ section{
 
 .filter-tab{
 
+}
+
+.hidden {
+  display: none;
 }
