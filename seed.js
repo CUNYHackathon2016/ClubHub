@@ -38,7 +38,7 @@ var seedUnis = function () {
 }
 
 var seedClasses = function () {
-    var classes = [/*
+    var classes = [
         { name: 'ART 10100-3GJ',
         type: 'LEC (17190)',
         firstDate: 'We',
@@ -46,7 +46,7 @@ var seedClasses = function () {
         startTime: '6:15PM',
         endTime: '9:05PM',
         location: 'Comp Goeth CG236',
-        universityId: 1 },*/
+        universityId: 1 },
         { name: 'CSC 11300-2B',
         type: 'LEC (58940)',
         firstDate: 'Tu',
@@ -129,6 +129,47 @@ var seedClubs = function () {
     return Promise.all(creatingClubs);
 }
 
+var seedEvents = function () {
+    var clubs = [
+        {
+            name: "Hackathon Club",
+            desc: "We hack.",
+            type: "Engineering",
+            universityId: "1"
+        },
+        {
+            name: "ACM",
+            desc: "The association for Computing Machinery (ACM) is an internation learned society for computing. It was ounded in 1947 and is the world's largest education computing society.",
+            type: "Engineering",
+            universityId: "1"
+        },
+        {
+            name: "EDM Club",
+            desc: "WUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUB",
+            type: "Art",
+            universityId: "1"
+        },
+        {
+            name: "The Acronym Club",
+            desc: "The Random Acronym Club (RAC_ is a club designed specifically to fit the world's acronym needs. Our top 5 favorite acronyms are CUNY, ABBA, FUBAR, Laser, and YOLO.",
+            type: "Entertainment",
+            universityId: "1"
+        },
+        {
+            name: "Space Pirates",
+            desc: "We like space and we like to pirate. But not hte cool pirates from a couple hundred years ago. No, we just downlaod torrented TV shows about space and then talk about it in excrutiating detail.",
+            type: "Entertainment",
+            universityId: "1"
+        }
+    ]
+
+    var creatingClubs = clubs.map(function (club) {
+        return Club.create(club);
+    });
+
+    return Promise.all(creatingClubs);
+}
+
 db.sync({force:true})
 .then(function () {
     return seedUnis();
@@ -147,8 +188,19 @@ db.sync({force:true})
         isAdmin: true
     })
 })
+.then(function (user) {
+    return user.setClasses([3,4,5]);
+})
+.then(function () {
+    return User.create({
+        username: 'Pat',
+        email: 'pat@gmail.com',
+        password: 'pat',
+        isAdmin: true
+    })
+})
 .then(function(user) {
-    return user.setClasses([1,2,3,4]);
+    return user.setClasses([1,2,3]);
 })
 .then(function () {
     console.log("Seed Successful!");

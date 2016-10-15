@@ -6,6 +6,7 @@
 		scheduler.config.last_hour = 19;
 		scheduler.init('scheduler_here',new Date(),"week");
 
+
 		var user = {username: "pat"};
 
 		// scheduler.load("./data/events.xml");
@@ -175,11 +176,28 @@
 		}
 	}
 
-	$.get('/api/user/1/classes')
-	.done(function (classes) {
-		parsingDataObj(classes);
+/*	$.ajax({
+     url: "/api/user/current",
+     success: function(user) {
+         console.log(user, "((()#($)()#()");
+     }
+  });*/
+
+	$.get('/api/user/classes')
+	.done(function (obj) {
+		console.log("OBJ",obj);
+		parsingDataObj(obj.classes);
 	})
 
+
+/*	$.get('/api/user/current')
+    .done(function (user) {
+        console.log(user, "((()#($)()#()");
+    })
+    .fail(function () {
+        console.log("didn't work");
+    })
+*/
 	// Converting time with am/pm to 24 hour time
 	// var allEvents = scheduler.getEvents();
 	// allEvents.forEach(function(event){

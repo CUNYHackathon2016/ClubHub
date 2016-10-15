@@ -16,34 +16,34 @@ function assertIsLoggedIn(req, res, next) {
 }
 
 router.get('/:id', function(req, res, next){
-  Club.findOne({
+  Event.findOne({
     where: {
       id: req.params.id
     },
     include: [User]
   })
-  .then(function(club) {
-    res.send(club);
+  .then(function(event) {
+    res.send(event);
   })
   .catch(next);
 })
 
 router.get('/', function(req, res, next) {
-  Club.findAll()
-  .then(function(clubs) {
-    res.send(clubs)
+  Event.findAll()
+  .then(function(events) {
+    res.send(events)
   })
   .catch(next);
 })
 
 router.put('/:id', assertIsLoggedIn, function(req, res, next){
-  Club.findOne({
+  Event.findOne({
     where: {
       id: req.params.id
     }
   })
-  .then(function(club) {
-    return club.addUser(req.user.id)
+  .then(function(event) {
+    return Event.addUser(req.user.id)
   })
   .then(function(data) {
     console.log(data);
@@ -53,7 +53,7 @@ router.put('/:id', assertIsLoggedIn, function(req, res, next){
 })
 
 router.delete('/:id', assertIsAdmin, function (req, res, next) {
-  Club.destroy({
+  Event.destroy({
     where: {
       id: req.params.id
     }

@@ -79,6 +79,7 @@ module.exports = function () {
                 }
             })
             .then(function (user) {
+                 console.log("USER***2", user);
                 // user.correctPassword is a method from the User schema.
                 if (!user || !user.correctPassword(password)) {
                     done(null, false);
