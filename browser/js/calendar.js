@@ -3,11 +3,25 @@
 		moment().format();
 		scheduler.config.xml_date="%Y-%m-%d %H:%i";
 		scheduler.config.first_hour = 7;
-		scheduler.config.last_hour = 19;
+		scheduler.config.last_hour = 18;
 		scheduler.init('scheduler_here',new Date(),"week");
 
 
-		var user = {username: "pat"};
+    var events = [{start_date: "15/10/2016 9:00",
+    end_date:   "15/10/2016 9:50",
+    text:   "CUNY Hackathon",
+    color: "brown"},
+    {start_date: "23/10/2016 6:15",
+    end_date:   "23/10/2016 7:05",
+    text:   "UX Prototyping Mini Hack",
+    color: "brown"},
+    {start_date: "31/10/2016 12:00",
+    end_date:   "31/10/2016 12:50",
+    text:   "Spooky Hackathon",
+    color: "brown"}];
+    events.forEach(function(evt){
+      scheduler.addEvent(evt);
+    });
 
 		// scheduler.load("./data/events.xml");
 
@@ -95,7 +109,7 @@
 				console.log(classObj);
 				// $.post("/api/user/class", classObj)
 			})
-			updateSchedule(newArr, true);
+			updateSchedule(newArr, true, events);
 			mySpecificSchedule  = newArr;
 
 			//SOCKET LOGIC BELOW
@@ -108,8 +122,8 @@
 	$('#create').click(function(evt){
 		var nickname = $('#nickname').val();
 		evt.preventDefault();
-		console.log(mySpecificSchedule);
 		socket.emit('create',nickname, roomcode,mySpecificSchedule);
+		$('#createCode').show();
 	});
 	$('#join').click(function(evt){
 		var nickname = $('#nickname').val();
@@ -121,7 +135,7 @@
 
 	socket.on('update schedule',function(users, schedule){
 		scheduler.clearAll();
-		updateSchedule(schedule, false);
+		updateSchedule(schedule, false, events);
 		$('#chat-box-div').show();
 	});
 
@@ -141,7 +155,7 @@
 
 
 	function parsingDataObj(data) {
-		var allTheColors = ["red","blue","green","orange","purple","brown","gold","fuchsia","gray"];
+		var allTheColors = ["red","blue","green","orange","purple","gold","fuchsia","gray"];
 		data.forEach(function(evt,idx){
 			// console.log(evt.name+" :   "+allTheColors[idx]);
 			evt.color = allTheColors[idx];
@@ -183,11 +197,6 @@
      }
   });*/
 
-	$.get('/api/user/classes')
-	.done(function (obj) {
-		console.log("OBJ",obj);
-		parsingDataObj(obj.classes);
-	})
 
 
 /*	$.get('/api/user/current')
@@ -206,8 +215,11 @@
 
 	}
 
-	function updateSchedule(theObject, isRandomColor){
+	function updateSchedule(theObject, isRandomColor, events){
     var allTheColors;
+		events.forEach(function(evt){
+			scheduler.addEvent(evt);
+		});
     if (isRandomColor){
       allTheColors = ["red","blue","green","orange","purple","brown","gold","fuchsia","gray"];
   		theObject.forEach(function(evt,idx){
